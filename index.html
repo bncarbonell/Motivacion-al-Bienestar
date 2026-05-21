@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Simulador de Hábitos Saludables&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--primary: #4CAF50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--primary-dark: #45a049;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg: #f4f7f6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sim-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 25px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 600px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stats-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-around;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #eef2f1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-box {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 45%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bar-outer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bar-inner {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: width 0.5s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>#energia-bar { background: #ff9800; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#motivacion-bar { background: #2196F3; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.scenario-box {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 120px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.options-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid var(--primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hidden {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.feedback {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-style: italic;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #666;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="sim-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Tu Día Saludable&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;¡Toma decisiones y mantén tu motivación alta!&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="stats-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="label-energia"&gt;⚡ Energía: 100%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bar-outer"&gt;&lt;div id="energia-bar" class="bar-inner"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stat-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="label-motivacion"&gt;🧠 Motivación: 100%&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="bar-outer"&gt;&lt;div id="motivacion-bar" class="bar-inner"&gt;&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="scenario" class="scenario-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Suena la alarma a las 6:30 AM... ¿Qué haces?</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="options" class="options-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="feedback" class="feedback"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button id="reset-btn" class="hidden" onclick="reiniciarSimulador()"&gt;Jugar de nuevo&lt;/button&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Variables de estado del jugador</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let energia = 100;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let motivacion = 100;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let pasoActual = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Base de datos de los escenarios del juego</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const pasos = [</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>texto: "⏰ Sonó la alarma temprano. Tienes tiempo para estirar o hacer una rutina corta.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opciones: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Me levanto ya y hago 15 min de ejercicio", energia: -10, motivacion: 20, feedback: "¡Excelente! Cuesta arrancar, pero la dopamina activa tu mañana." },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "5 minutos más... (apagas la alarma)", energia: 5, motivacion: -15, feedback: "Te quedaste dormido. Te levantas con prisa y un poco de culpa." }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>texto: "🍳 Es la hora del desayuno. El cuerpo necesita combustible.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opciones: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Fruta, avena y un huevo revuelto", energia: 25, motivacion: 10, feedback: "Energía limpia y duradera. Tu cerebro te lo agradece." },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Un café rápido y una dona industrial", energia: 15, motivacion: -10, feedback: "Subidón de azúcar inmediato... pero la caída de energía va a doler." }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>texto: "🏢 Estás en el trabajo/estudio y tienes que subir al tercer piso.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opciones: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Uso las escaleras, un poco de cardio gratis", energia: -5, motivacion: 15, feedback: "¡Eso es aprovechar las oportunidades! Sumas pasos al día." },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Espero el ascensor, no quiero sudar", energia: 0, motivacion: -5, feedback: "Cómodo, pero perdiste una oportunidad de activar la circulación." }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">        </span>{</p>
+<p class="p1"><span class="Apple-converted-space">            </span>texto: "🛋️ Llegas a casa por la tarde después de un día pesado. Toca entrenar.",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opciones: [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Me pongo la ropa deportiva de inmediato y salgo", energia: -20, motivacion: 30, feedback: "¡La regla de los 5 segundos! Venciste la pereza." },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ texto: "Me siento un rato en el sillón a ver el móvil", energia: 5, motivacion: -30, feedback: "El sillón te atrapó. La motivación cayó en picada." }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function actualizarInterfaz() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Asegurar límites entre 0 y 100</p>
+<p class="p1"><span class="Apple-converted-space">        </span>energia = Math.max(0, Math.min(100, energia));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>motivacion = Math.max(0, Math.min(100, motivacion));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Actualizar textos y barras</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('label-energia').innerText = `⚡ Energía: ${energia}%`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('energia-bar').style.width = `${energia}%`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('label-motivacion').innerText = `🧠 Motivación: ${motivacion}%`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('motivacion-bar').style.width = `${motivacion}%`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function cargarEscenario() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (pasoActual &lt; pasos.length) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const paso = pasos[pasoActual];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('scenario').innerText = paso.texto;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const optionsContainer = document.getElementById('options');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>optionsContainer.innerHTML = ''; // Limpiar botones anteriores</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>paso.opciones.forEach((opcion, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btn = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.innerText = opcion.texto;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.onclick = () =&gt; procesarDecision(index);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>optionsContainer.appendChild(btn);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>finalizarSimulador();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function procesarDecision(index) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const opcion = pasos[pasoActual].opciones[index];</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Aplicar cambios</p>
+<p class="p1"><span class="Apple-converted-space">        </span>energia += opcion.energia;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>motivacion += opcion.motivacion;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Mostrar feedback</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('feedback').innerText = opcion.feedback;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>actualizarInterfaz();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pasoActual++;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Pequeña pausa para que lean el feedback antes del siguiente escenario</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('feedback').innerText = "";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cargarEscenario();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}, 3000);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function finalizarSimulador() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('options').innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let resultadoFinal = "";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (motivacion &gt;= 60 &amp;&amp; energia &gt;= 40) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultadoFinal = "🏆 ¡Día Perfecto! Lograste equilibrar tus ganas con tu salud física. Estás construyendo un estilo de vida sólido.";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else if (motivacion &lt; 50 &amp;&amp; energia &gt; 60) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultadoFinal = "😴 Tienes energía física, pero tu mente está en modo perezoso. Recuerda que la motivación no llega sola, ¡se crea actuando!";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else if (energia &lt; 30) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultadoFinal = "🥵 Terminaste exhausto. Cuidar la salud también implica descansar correctamente y medir tus esfuerzos.";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resultadoFinal = "🔄 Un día regular. Mañana es una nueva oportunidad para tomar mejores decisiones.";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('scenario').innerHTML = `&lt;strong&gt;Fin del día.&lt;/strong&gt;&lt;br&gt;&lt;br&gt;${resultadoFinal}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('reset-btn').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function reiniciarSimulador() {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>energia = 100;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>motivacion = 100;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>pasoActual = 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('reset-btn').addClass;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('reset-btn').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>actualizarInterfaz();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>cargarEscenario();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>// Iniciar por primera vez</p>
+<p class="p1"><span class="Apple-converted-space">    </span>actualizarInterfaz();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>cargarEscenario();</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
