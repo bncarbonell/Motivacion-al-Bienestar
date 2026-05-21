@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Hábitos Saludables</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #45a049;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .sim-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #eef2f1;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-box {
+            width: 45%;
+        }
+
+        .bar-outer {
+            background: #ddd;
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .bar-inner {
+            height: 100%;
+            width: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+        }
+
+        #energia-bar { background: #ff9800; }
+        #motivacion-bar { background: #2196F3; }
+
+        .scenario-box {
+            min-height: 120px;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .feedback {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sim-container">
+    <h1>Tu Día Saludable</h1>
+    <p>¡Toma decisiones y mantén tu motivación alta!</p>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <span id="label-energia">⚡ Energía: 100%</span>
+            <div class="bar-outer"><div id="energia-bar" class="bar-inner"></div></div>
+        </div>
+        <div class="stat-box">
+            <span id="label-motivacion">🧠 Motivación: 100%</span>
+            <div class="bar-outer"><div id="motivacion-bar" class="bar-inner"></div></div>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <div id="scenario" class="scenario-box">
+        Suena la alarma a las 6:30 AM... ¿Qué haces?
+    </div>
+
+    <div id="options" class="options-container">
+        </div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <button id="reset-btn" class="hidden" onclick="reiniciarSimulador()">Jugar de nuevo</button>
+</div>
+
+<script>
+    // Variables de estado del jugador
+    let energia = 100;
+    let motivacion = 100;
+    let pasoActual = 0;
+
+    // Base de datos de los escenarios del juego
+    const pasos = [
+        {
+            texto: "⏰ Sonó la alarma temprano. Tienes tiempo para estirar o hacer una rutina corta.",
+            opciones: [
+                { texto: "Me levanto ya y hago 15 min de ejercicio", energia: -10, motivacion: 20, feedback: "¡Excelente! Cuesta arrancar, pero la dopamina activa tu mañana." },
+                { texto: "5 minutos más... (apagas la alarma)", energia: 5, motivacion: -15, feedback: "Te quedaste dormido. Te levantas con prisa y un poco de culpa." }
+            ]
+        },
+        {
+            texto: "🍳 Es la hora del desayuno. El cuerpo necesita combustible.",
+            opciones: [
+                { texto: "Fruta, avena y un huevo revuelto", energia: 25, motivacion: 10, feedback: "Energía limpia y duradera. Tu cerebro te lo agradece." },
+                { texto: "Un café rápido y una dona industrial", energia: 15, motivacion: -10, feedback: "Subidón de azúcar inmediato... pero la caída de energía va a doler." }
+            ]
+        },
+        {
+            texto: "🏢 Estás en el trabajo/estudio y tienes que subir al tercer piso.",
+            opciones: [
+                { texto: "Uso las escaleras, un poco de cardio gratis", energia: -5, motivacion: 15, feedback: "¡Eso es aprovechar las oportunidades! Sumas pasos al día." },
+                { texto: "Espero el ascensor, no quiero sudar", energia: 0, motivacion: -5, feedback: "Cómodo, pero perdiste una oportunidad de activar la circulación." }
+            ]
+        },
+        {
+            texto: "🛋️ Llegas a casa por la tarde después de un día pesado. Toca entrenar.",
+            opciones: [
+                { texto: "Me pongo la ropa deportiva de inmediato y salgo", energia: -20, motivacion: 30, feedback: "¡La regla de los 5 segundos! Venciste la pereza." },
+                { texto: "Me siento un rato en el sillón a ver el móvil", energia: 5, motivacion: -30, feedback: "El sillón te atrapó. La motivación cayó en picada." }
+            ]
+        }
+    ];
+
+    function actualizarInterfaz() {
+        // Asegurar límites entre 0 y 100
+        energia = Math.max(0, Math.min(100, energia));
+        motivacion = Math.max(0, Math.min(100, motivacion));
+
+        // Actualizar textos y barras
+        document.getElementById('label-energia').innerText = `⚡ Energía: ${energia}%`;
+        document.getElementById('energia-bar').style.width = `${energia}%`;
+
+        document.getElementById('label-motivacion').innerText = `🧠 Motivación: ${motivacion}%`;
+        document.getElementById('motivacion-bar').style.width = `${motivacion}%`;
+    }
+
+    function cargarEscenario() {
+        if (pasoActual < pasos.length) {
+            const paso = pasos[pasoActual];
+            document.getElementById('scenario').innerText = paso.texto;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = ''; // Limpiar botones anteriores
+
+            paso.opciones.forEach((opcion, index) => {
+                const btn = document.createElement('button');
+                btn.innerText = opcion.texto;
+                btn.onclick = () => procesarDecision(index);
+                optionsContainer.appendChild(btn);
+            });
+        } else {
+            finalizarSimulador();
+        }
+    }
+
+    function procesarDecision(index) {
+        const opcion = pasos[pasoActual].opciones[index];
+        
+        // Aplicar cambios
+        energia += opcion.energia;
+        motivacion += opcion.motivacion;
+        
+        // Mostrar feedback
+        document.getElementById('feedback').innerText = opcion.feedback;
+
+        actualizarInterfaz();
+        pasoActual++;
+
+        // Pequeña pausa para que lean el feedback antes del siguiente escenario
+        setTimeout(() => {
+            document.getElementById('feedback').innerText = "";
+            cargarEscenario();
+        }, 3000);
+    }
+
+    function finalizarSimulador() {
+        document.getElementById('options').innerHTML = '';
+        let resultadoFinal = "";
+
+        if (motivacion >= 60 && energia >= 40) {
+            resultadoFinal = "🏆 ¡Día Perfecto! Lograste equilibrar tus ganas con tu salud física. Estás construyendo un estilo de vida sólido.";
+        } else if (motivacion < 50 && energia > 60) {
+            resultadoFinal = "😴 Tienes energía física, pero tu mente está en modo perezoso. Recuerda que la motivación no llega sola, ¡se crea actuando!";
+        } else if (energia < 30) {
+            resultadoFinal = "🥵 Terminaste exhausto. Cuidar la salud también implica descansar correctamente y medir tus esfuerzos.";
+        } else {
+            resultadoFinal = "🔄 Un día regular. Mañana es una nueva oportunidad para tomar mejores decisiones.";
+        }
+
+        document.getElementById('scenario').innerHTML = `<strong>Fin del día.</strong><br><br>${resultadoFinal}`;
+        document.getElementById('reset-btn').classList.remove('hidden');
+    }
+
+    function reiniciarSimulador() {
+        energia = 100;
+        motivacion = 100;
+        pasoActual = 0;
+        document.getElementById('reset-btn').classList.add('hidden');
+        actualizarInterfaz();
+        cargarEscenario();
+    }
+
+    // Iniciar por primera vez
+    actualizarInterfaz();
+    cargarEscenario();
+</script>
+
+</body>
+</html>
